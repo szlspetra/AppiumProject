@@ -7,6 +7,10 @@ import org.example.utils.ElementActions;
 import org.example.utils.ReporterSetup;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 import static org.openqa.selenium.By.*;
 import static org.testng.Assert.fail;
@@ -49,7 +53,10 @@ public class HomePage {
     }
     public WebElement getProfileMonogram() {
         try {
-            WebElement element = driver.findElement(By.id(sProfileMonogram));
+            By profileMonogramLocator = By.id(sProfileMonogram);
+
+            WebElement element = new WebDriverWait(driver, Duration.ofSeconds(15))
+                    .until(ExpectedConditions.visibilityOfElementLocated(profileMonogramLocator));
             ElementActions.waitForElementToBeClickable(driver,element);
             reporter.info("Profile monogram icon exists");
             return element;

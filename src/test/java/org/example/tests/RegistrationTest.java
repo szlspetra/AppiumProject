@@ -12,8 +12,7 @@ import org.testng.ITestResult;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class RegistrationTest  extends org.example.TestBase {
     private HomePage homePage;
@@ -35,13 +34,13 @@ public class RegistrationTest  extends org.example.TestBase {
 
         @Test
         public void testSuccessfulRegistration() throws Exception {
-            HomePage homePage = new HomePage(driver, reporter);
+            homePage = new HomePage(driver, reporter);
 
             reporter.info("Current activity: " +driver.currentActivity());
             homePage.clickProfileImg();
 
             login = new Login(driver,reporter);
-            login.clickRegistrationLink();;
+            login.clickRegistrationLink();
 
             registrationPage = new RegistrationPage(driver, reporter);
             registrationPage.setFirstName(TestData.REG_FIRST_NAME);
@@ -63,7 +62,7 @@ public class RegistrationTest  extends org.example.TestBase {
             interests.clickSkipBtn();
 
             String html = GmailTest.getFolder(TestData.EMAIL_SENDER_EMAIL).get(0).get("ConfirmationLink");
-            assertFalse(html.length()==0, "Email verification failed. Missing confirmation link: "+GmailTest.getFolder(TestData.EMAIL_SENDER_EMAIL).get(0).get("HTML"));
+            assertNotEquals(html.length(), 0, "Email verification failed. Missing confirmation link: " + GmailTest.getFolder(TestData.EMAIL_SENDER_EMAIL).get(0).get("HTML"));
             reporter.info("Email verification passed. Confirmation email: " + html);
 
             tearDown();
