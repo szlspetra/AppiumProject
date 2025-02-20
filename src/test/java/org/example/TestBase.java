@@ -1,8 +1,10 @@
 package org.example;
 
 import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.appium.java_client.android.AndroidDriver;
 import org.example.constants.Config;
+import org.example.tests.RegistrationTest;
 import org.example.utils.ReporterSetup;
 import org.example.utils.SuiteWideStorage;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -41,6 +43,7 @@ public class TestBase {
         caps.setCapability("appium:autoGrantPermissions", true);
         caps.setCapability("appium:noReset", false);
         caps.setCapability("appium:autoLaunch", true);
+        caps.setCapability("appium:newCommandTimeout", 600);
 
         driver = new AndroidDriver(new URL(Config.DRIVER_URL), caps);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -49,6 +52,18 @@ public class TestBase {
         SuiteWideStorage.testReport.attachReporter(new ReporterSetup().createReporter());
     }
 
+    @BeforeSuite(alwaysRun = true)
+    public void initReport() {
+        ExtentSparkReporter htmlReporter = new ExtentSparkReporter("target/ExtentReport.html");
+        htmlReporter.config().setDocumentTitle("Appium Tesztjelentés");
+        htmlReporter.config().setReportName("Regisztrációs Tesztkörnyezet");
+
+        SuiteWideStorage.testReport = new ExtentReports();
+        SuiteWideStorage.testReport.attachReporter(htmlReporter);
+        SuiteWideStorage.testReport.setSystemInfo("Környezet", "QA");
+    }
+
+
     /**
      * Cleans up after test suite execution
      * Terminates app and quits driver instance
@@ -56,7 +71,7 @@ public class TestBase {
     @AfterSuite(alwaysRun = true)
     public void tearDown() {
         if (driver != null) {
-            driver.terminateApp(Config.APP_PACKAGE);
+            //driver.terminateApp(Config.APP_PACKAGE);
             driver.quit();
         }
     }
@@ -67,7 +82,7 @@ public class TestBase {
      */
     @AfterSuite(alwaysRun = true)
     public void baseAfterSuite() {
-        SuiteWideStorage.testReport.flush();
+        RegistrationTest.getReporter().flush();
         System.out.println("Report generated: " + ReporterSetup.getReporterPath() );
     }
 

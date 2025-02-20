@@ -1,5 +1,6 @@
 package org.example.tests;
 
+import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import org.example.constants.TestContextConstants;
 import org.example.constants.TestData;
@@ -18,7 +19,7 @@ public class RegistrationTest  extends org.example.TestBase {
     private HomePage homePage;
     private RegistrationPage registrationPage;
     private Login login;
-    private ExtentTest reporter;
+    private static ExtentTest reporter;
     private AreaOfInterests interests;
     private Widget widget;
 
@@ -84,4 +85,7 @@ public class RegistrationTest  extends org.example.TestBase {
             reporter.info("Login was successfull");
         }
 
+    public static ExtentReports getReporter() {
+        return reporter.getExtent();
+    }
 }
