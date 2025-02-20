@@ -32,7 +32,17 @@
     - USB debugging enabled
     - Developer mode activated
     - Verify connection using `adb devices`
+      
+## Pre-installed Application Requirement
+The target application **must be manually installed** on the test device/emulator prior to execution
 
+Appium will NOT handle installation via app capability
+
+Verify installation via:
+```
+bash
+adb shell pm list packages | grep com.interticket.budapest13
+```
 ## Configuration Variables
 | Variable Name       | Description                                     | Example Value                     |
 |---------------------|-------------------------------------------------|-----------------------------------|
