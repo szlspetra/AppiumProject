@@ -17,7 +17,7 @@
 
 ## Installation
 1. Clone the repository:  
-   `git clone https://github.com/yourrepo/project.git`
+   `git clone https://github.com/szlspetra/AppiumProject.git`
 2. Install Appium dependencies:  
    `npm install -g appium`
 3. Verify environment setup:  
@@ -34,14 +34,14 @@
     - Verify connection using `adb devices`
 
 ## Configuration Variables
-| Variable Name       | Description                                      | Example Value                     |
-|---------------------|--------------------------------------------------|-----------------------------------|
-| `PLATFORM_VERSION`  | Platform version (e.g., Android API level)      | `15.0`                            |
-| `PLATFORM_NAME`     | Platform name (`Android`/`iOS`)                 | `Android`                         |
-| `DEVICE_NAME`       | Device name/ID (verify with `adb devices`)      | `emulator-5554`                   |
-| `APP_PACKAGE`       | Application package name                       | `com.interticket.budapest13`      |
-| `APP_ACTIVITY`      | Main activity                                   | `com.interticket.smartcity.Ui.MainActivity` |
-| `DRIVER_URL`        | Appium server URL                              | `http://127.0.0.1:4723`           |
+| Variable Name       | Description                                     | Example Value                     |
+|---------------------|-------------------------------------------------|-----------------------------------|
+| `PLATFORM_VERSION`  | Platform version (e.g., Android API level)     | `15.0`                            |
+| `PLATFORM_NAME`     | Platform name            | `Android`                         |
+| `DEVICE_NAME`       | Device name/ID (verify with `adb devices`)     | `emulator-5554`                   |
+| `APP_PACKAGE`       | Application package name                      | `com.interticket.budapest13`      |
+| `APP_ACTIVITY`      | Main activity                                  | `com.interticket.smartcity.Ui.MainActivity` |
+| `DRIVER_URL`        | Appium server URL                             | `http://127.0.0.1:4723`           |
 
 ## 🔒 Environment Variables Setup
 All sensitive credentials (email, passwords, API keys) are stored in environment variables to prevent accidental exposure in code. These must be set before test execution, as the tests will fail if they're missing.
@@ -58,14 +58,15 @@ All sensitive credentials (email, passwords, API keys) are stored in environment
 Windows (PowerShell):
 ```
 $env:GMAIL_ADDRESS = "your_email@gmail.com"
-$env:GMAIL_APP_PWD = "your_app_password"
+$env:GMAIL_APP_PWD = "your_gmail_app_password"
+$env:APP_PWD = "your_bp13_password"
 ```
 
 IntelliJ Configuration:
 1. Run → Edit Configurations
 2. Add variables under `Environment variables`:
 ```
-GMAIL_ADDRESS=your_email@gmail.com;GMAIL_APP_PWD=your_app_password
+GMAIL_ADDRESS=your_email@gmail.com;GMAIL_APP_PWD=your_app_password;APP_PWD=your_bp13_password
 ```
 
 ### Security Best Practices
